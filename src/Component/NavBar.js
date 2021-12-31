@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-export default function NavBar() {
+export default function NavBar({setToken}) {
     return (
 
         <div>
@@ -21,6 +21,14 @@ export default function NavBar() {
                <li>
               <Link to ="/ToDoList"> ToDoList</Link>     
                </li>
+
+               <li>
+
+                   <Link  to="login" onClick={()=>{setToken("")}}>log out</Link> 
+           
+
+             </li>
+
 
          </ul>
         </div>

@@ -26,7 +26,7 @@ export default function App() {
       }}/>
 
 
-{token}
+{/* {token} */}
 
         </div>
     )
