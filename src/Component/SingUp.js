@@ -23,7 +23,7 @@ const changePass=(e)=>{
 
 }
 const signUpNew=async()=>{
-const result =await  axios.post("http://localhost:5000/signUp",{FristName,email,password})
+const result =await  axios.post(`${process.env.REACT_APP_BACKEND_URL}/signUp`,{FristName,email,password})
 if( result.status===200){
     history.push("/login")
 }
@@ -31,12 +31,12 @@ if( result.status===200){
 
 
     return (
-        <div>
-    <input onChange={(e)=>{changeFristName(e)}} type="text" placeholder="name" />
-    <input onChange={(e)=>{changeemail(e)}} type="text" placeholder="email" />
-    <input onChange={(e)=>{changePass(e)}} type="password" placeholder="pass" />
+        <div className="div">
+    <input className="input" onChange={(e)=>{changeFristName(e)}} type="text" placeholder="name" />
+    <input  className="input" onChange={(e)=>{changeemail(e)}} type="text" placeholder="email" />
+    <input  className="input" onChange={(e)=>{changePass(e)}} type="password" placeholder="pass" />
 
-       <button onClick={()=>{signUpNew()}} >signUp</button>
+       <button  className="but" onClick={()=>{signUpNew()}} >signUp</button>
 
 
 

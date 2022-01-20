@@ -2,9 +2,7 @@ import axios from "axios";
 import React, {useState} from "react";
 import { useHistory } from "react-router-dom";
 
-
-
-export default function Login({ setToken }) {
+export default function Login({ setToken ,setAdmin}) {
 
 const [ email , setemail] = useState("");
 const [ password , setpassword] = useState ("");
@@ -22,24 +20,25 @@ const loginNew=async()=>{
     console.log(email,password);
 
     
-    const result = await axios.post("http://localhost:5000/login",{email:email,password:password})
+    const result = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`,{email:email,password:password})
     // console.log(result.data.token);
-    // console.log(result.status);
-    if( result.status===200){
+     console.log(result.data);
+   
         setToken(result.data.token)
-        
-        
-        history.push("/")
-    }
+        setAdmin(result.data.payload.Admin)
+        localStorage.setItem("token",JSON.stringify(result.data.token))
+        history.push("/ToDoList")
+    
     
 }
     return (
 
-        <div>
+        <div className="div"> 
             
-            <input onChange={(e)=>{changeemail(e)}} type="text" placeholder="email" />
-            <input onChange={(e)=>{changePass(e)}} type="password" placeholder="pass" />
-            <button onClick={(e)=>{loginNew(e)}} >login</button> 
+            <input className="input" onChange={(e)=>{changeemail(e)}} type="text" placeholder="email" />
+            <input className="input"onChange={(e)=>{changePass(e)}} type="password" placeholder="pass" /> 
+            <button className="but" onClick={(e)=>{loginNew(e)}} >login</button> 
+            
         </div>
     )
 }

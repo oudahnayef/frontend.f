@@ -1,124 +1,247 @@
-import React , {useState , useEffect} from 'react'
-import axios from 'axios'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
+export default function ToDoList({ token }) {
+  const [Todo, setTodo] = useState([]);
+  const [task, setTask] = useState("");
+  const [name, setName] = useState("");
 
+  const [nameInput, setNameInput] = useState("");
+  const [taskInput, setTaskInput] = useState("");
+  const [togle, setTogle] = useState(false);
+  // const [towTogle, setTowTogle] = useState(false);
+  const [complete, setComplete] = useState(false);
 
-export default function ToDoList({token}) {
-const [Todo, setTodo] = useState([])
-const [task , setTask] = useState ("")
-const [name , setName] = useState ("")
-// const [lastName, setlastName] = useState("")
-// const [ task , setTask] = useState ("")
-
-// console.log(token);
-// useEffect(async () => {
-//   console.log(Todo,"cccccccc");
-//     // console.log("http://localhost:5000/task");
-//     const res = await axios.get("http://localhost:5000/task",{
-//       headers:{authorization: "Bearer " + token},
-
-//     });
-
-//     setTodo(res.data);
-//     console.log("data",res.data);
-
-//   }, []); 
-useEffect(async () => {
-  const res = await axios.get("http://localhost:5000/task", {
-    headers: {authorization: `Bearer ${token}` },
-  });
+  useEffect(async () => {
+    const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/task`, {
+      headers: { authorization: `Bearer ${token}` },
+    });
+    console.log(Todo);
+    setTodo(res.data);
+  }, []);
+  console.log(token);
+  console.log(task, "hhhhhhh");
+  console.log(name, "hhhhhhhh");
   console.log(Todo);
-  setTodo(res.data);
-}, []);
 
-console.log(task,"hhhhhhh");
-console.log(name,"hhhhhhhh");
-console.log(Todo);
-
-  const pushTask = async () =>{
-    // console.log(token);
+  const pushTask = async () => {
     try {
+      const result = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/task`,
+        {
+          newName: name,
+          newTask: task,
+        },
+        {
+          headers: { authorization: "Bearer " + token },
+        }
+      );
 
-        const result = await axios.post(`http://localhost:5000/task`, {
-            newName:name,
-            newTask:task,
-          },
-          {
-          headers:{authorization: "Bearer " + token},
-          }
-          );
-
-
-          setTodo(result.data);
-          console.log(result.data);
-        
+      setTodo(result.data);
+      console.log(result.data);
     } catch (error) {
-        // console.log(error);
+      // console.log(error);
     }
-     
-  }
+  };
 
-  const deletAllTask = async() =>{
-
-    const deleted = await axios.delete(`http://localhost:5000/task`,{
-      headers:{authorization: "Bearer " + token},
-     });
+  const deletAllTask = async () => {
+    const deleted = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/task`, {
+      headers: { authorization: "Bearer " + token },
+    });
     //  setTodo(deleted.data);
-       const copiedArray = [...task];
-       copiedArray.splice(0,task.length);
-       setTodo(copiedArray);
-     
-    
-  }
+    const copiedArray = [...task];
+    copiedArray.splice(0, task.length);
+    setTodo(copiedArray);
+  };
+
+  const deletone = async (id) => {
+    const deleted = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/task/${id}`, {
+      headers: { authorization: "Bearer " + token },
+    });
+    setTodo(deleted.data);
+  };
+
+  const updateTask = async (id) => {
+    setTogle(false);
+    const upTask = await axios.put(
+      `${process.env.REACT_APP_BACKEND_URL}/task`,
+      { id: id, name: nameInput, task: taskInput },
+
+      { headers: { authorization: "Bearer " + token } }
+    );
+
+    setTodo(upTask.data);
+  };
+
+  const updatComplete = async (id) => {
+    const result = await axios.put(
+      `${process.env.REACT_APP_BACKEND_URL}/task/${id}`,
+      { fenishTask: true },
+      {
+        headers: { authorization: "Bearer " + token },
+      }
+    );
+
+    setTodo(result.data);
+
+ 
+  };
 
 
-const deletone= async (id)=>{
-  const deleted = await axios.delete(`http://localhost:5000/task/${id}`,{
-    headers:{authorization: "Bearer " + token},
-   });
-   setTodo(deleted.data)
+  const CompleteFalse = async (id) => {
+    const result = await axios.put(
+      `${process.env.REACT_APP_BACKEND_URL}/task/${id}`,
+      { fenishTask: false },
+      {
+        headers: { authorization: "Bearer " + token },
+      }
+    );
 
-}
+    setTodo(result.data);
 
-
-
-
-///////////////////////////
-const changeName = (e) => {
-    setName(e.target.value)
-}
- const changeTask = (e) => {
-     setTask(e.target.value)
- };
+ 
+  };
 
 
 
-    return (
+  ///////////////////////////
+  const changeName = (e) => {
+    setName(e.target.value);
+  };
+  const changeTask = (e) => {
+    setTask(e.target.value);
+  };
 
-        <div>
-            <p>{Todo.name}</p>
-            <input onChange={(e)=>{changeName(e)}} type="text" placeholder="name" />
-            <br />
-            <input onChange={(e)=>{changeTask(e)}} type="text" placeholder="AddTask" />
-            <br />
-            <button onClick={(e)=>{pushTask()}} >ADD</button>
-            <button onClick={()=>{deletAllTask()}} >REMOVEAlltask</button>
+  // const changeTogle = (id, i) => {
+  //   setTogle(true);
+  // };
 
-{Todo.map((elme)=> {
-return (
-  <>
+  const completeTasks = (e) => {
+    setComplete(e.target.value);
+    // setComplete(false);
+  };
 
-  <h1>{elme.name}</h1>
+  return (
+    <div>
+      <div className="div">
+        <p>{Todo.name}</p>
+        <input
+          className="input"
+          onChange={(e) => {
+            changeName(e);
+          }}
+          type="text"
+          placeholder="name of the day"
+        />
+        <input
+          className="input"
+          onChange={(e) => {
+            changeTask(e);
+          }}
+          type="text"
+          placeholder="AddTask"
+        />
+        <button
+          className="butt"
+          onClick={(e) => {
+            pushTask();
+          }}
+        >
+          ADD
+        </button>
+        <button
+          className="butt"
+          onClick={() => {
+            deletAllTask();
+          }}
+        >
+          REMOVE All task
+        </button>
+        {/* <input className='input' onChange={(e)=>{completeTasks(e)}} type="checkbox" placeholder="AddTask" /> */}
+      </div>
+      {Todo.map((elme) => {
+        return (
+          <>
+            <div className="divv">
+              {elme.complete == true ? 
+              <h1 className="completedTask">{elme.name}</h1>
+            :
+            <h1>{elme.name}</h1>}
+              <h3>{elme.task}</h3>
+              {/* <input className='input' onChange={(e)=>{completeTasks(e)}} type="checkbox" placeholder="AddTask" /> */}
+              
+              
+              <button
+                className="butt"
+                onClick={() => {
+                  deletone(elme._id);
+                }}
+              >
+                remove
+              </button>
 
-  <h3>{elme.task}</h3>
-  <button onClick={()=>{deletone(elme._id)}}>remove</button>
-  <hr />
-  </>
-)
-}
+              {togle ? (
+                <>
+                  {/* <button
+                    className="butt"
+                    onClick={() => {
+                      updateTask(elme._id);
+                    }}
+                  >
+                    UpDATE
+                  </button> */}
+                  
+                  <br />
 
-)}           
+                  <input className="but"
+                    type="text"
+                    placeholder="name"
+                    onChange={(e) => {
+                      setNameInput(e.target.value);
+                    }}
+                  />
+                  <br />
+                  <input className="but"
+                    type="text"
+                    placeholder="task"
+                    onChange={(e) => {
+                      setTaskInput(e.target.value);
+                    }}
+                  />
+                </>
+              ) : (
+                ""
+              )}
 
-        </div>
-    )
+              <button
+                className="butshow"
+                onClick={() => {
+                  {
+                    updateTask(elme._id);
+                  }
+                  setTogle(!togle);
+                }}
+              >
+                UPDATE
+              </button>
+
+              {elme.complete == true ? <button className="butshow" onClick={() => {CompleteFalse(elme._id,elme.CompleteFalse)}}>uncomplete</button>:
+
+
+
+              <button
+              className="butt"
+              onClick={() => {
+                updatComplete(elme._id, elme.complete);
+              }}
+            >
+              complete
+            </button>}
+              
+            </div>
+          </>
+        );
+      })}
+    </div>
+  );
 }

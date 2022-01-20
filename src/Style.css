@@ -1,3 +1,231 @@
 body {
-    background-color: aliceblue;
+    background-color: #F3F4ED;
+    background-image:  url("https://i.pinimg.com/564x/4e/e9/e5/4ee9e5ee852b2e5d266fe825f6e7ff6d.jpg");
 }
+.homeBak{
+  background-image: url("https://st3.depositphotos.com/4136121/14598/i/1600/depositphotos_145984235-stock-photo-to-do-list-page-flat.jpg");
+  width: 100%;
+  height: 90vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    margin-top: -8px;
+    margin-left: -8px;
+    margin-right: -8px;
+    padding: 0;
+    overflow: hidden;
+    background-color: #435560;
+
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover:not(.active) {
+    background-color: #6E7C7C;
+  }
+  
+  .active {
+    background-color: #424642;
+  }
+/* // */
+  .input {
+    width: 300px ;
+    padding: 12px 20px;
+    margin: 16px;
+    display: inline-block;
+    border: 1px solid #F3F4ED;
+    border-radius: 4px;
+    box-sizing: border-box;
+    
+  }
+  
+  .but {
+    width: 300px;
+    background-color: #eeeeee;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .butshow{
+
+    width: 200px;
+    background-color: #6E7C7C;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .butshow:hover {
+    background-color: #536162;
+  }
+  .but:hover {
+    background-color: #536162;
+  }
+  .completedTask {
+    text-decoration: line-through;
+    
+  }
+  .butt {
+    width: 200px;
+    background-color: #6E7C7C;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px ;
+    border: none;
+    border-radius: 4px;
+    /* cursor: pointer; */
+  }
+  
+  .butt:hover {
+    background-color: #435560;
+  }
+  label{
+    color: #F3F4ED;
+  }
+  .div {
+    border-radius: 5px;
+    background-color: #424642;
+    padding: 20px;
+    margin: 50px;
+  }
+  .divv {
+    border-radius: 5px;
+    background-color: #C8C6A7;
+    padding: 20px;
+    margin: 50px;
+    width: 200;
+    height: 100;
+  }
+   @medie(max-width:300px){
+    body {
+      background-color: #F3F4ED;
+      background-image:  url("https://i.pinimg.com/564x/4e/e9/e5/4ee9e5ee852b2e5d266fe825f6e7ff6d.jpg");
+  }
+  .homeBak{
+    background-image: url("https://media.istockphoto.com/photos/check-off-a-todo-list-with-a-black-pen-picture-id1212554542?k=20&m=1212554542&s=612x612&w=0&h=-oEdrogzLxoGXrFNKPSnTlqI7H2GQ8a8wL6P4YEKq1g=");
+    width: 100%;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  ul {
+      list-style-type: none;
+      margin: 0;
+      margin-top: -8px;
+      margin-left: -8px;
+      margin-right: -8px;
+      padding: 0;
+      overflow: hidden;
+      background-color: #435560;
+  
+    }
+    
+    li {
+      float: left;
+    }
+    
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+    
+    li a:hover:not(.active) {
+      background-color: #6E7C7C;
+    }
+    
+    .active {
+      background-color: #424642;
+    }
+  /* // */
+    .input {
+      width: 300px ;
+      padding: 12px 20px;
+      margin: 16px;
+      display: inline-block;
+      border: 1px solid #F3F4ED;
+      border-radius: 4px;
+      box-sizing: border-box;
+      
+    }
+    
+    .but {
+      width: 300px;
+      background-color: #6E7C7C;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .butshow{
+  
+      width: 200px;
+      background-color: #6E7C7C;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .butshow:hover {
+      background-color: #536162;
+    }
+    .but:hover {
+      background-color: #536162;
+    }
+    .butt {
+      width: 200px;
+      background-color: #6E7C7C;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px ;
+      border: none;
+      border-radius: 4px;
+      /* cursor: pointer; */
+    }
+    
+    .butt:hover {
+      background-color: #435560;
+    }
+    label{
+      color: #F3F4ED;
+    }
+    .div {
+      border-radius: 5px;
+      background-color: #424642;
+      padding: 20px;
+      margin: 50px;
+    }
+    .divv {
+      border-radius: 5px;
+      background-color: #C8C6A7;
+      padding: 20px;
+      margin: 50px;
+      width: 200;
+      height: 100;
+    }
+   }
+  
